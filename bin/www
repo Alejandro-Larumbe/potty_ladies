@@ -1,0 +1,16 @@
+#!/usr/bin/env ts-node-script
+
+const { port } = require('../config');
+
+const app = require('../src/app');
+const db = require('../db/models');
+
+db.sequelize.authenticate()
+  .then(() => {
+    console.log('Database connection successful. Sequelize is ready to be used...');
+    app.listen(port, () => console.log(`Listening on port ${port}...`));
+  })
+  .catch(e => {
+    console.log('Database connection failed.');
+    console.error(e);
+  });
