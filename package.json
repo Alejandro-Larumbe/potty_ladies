@@ -19,8 +19,15 @@
   },
   "homepage": "https://github.com/Alejandro-Larumbe/potty_ladies#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "per-env": "^1.0.2"
+    "express-promise-router": "^4.0.1",
+    "morgan": "^1.10.0",
+    "per-env": "^1.0.2",
+    "pg": "^8.5.1",
+    "sequelize": "^5.22.3",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
