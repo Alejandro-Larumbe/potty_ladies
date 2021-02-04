@@ -1,8 +1,8 @@
-#!/usr/bin/env ts-node-script
+#!/usr/bin/env ts-node
 
 const { port } = require('../config');
-
-const app = require('../src/app');
+console.log('be creative')
+const app = require('../src/app.ts');
 const db = require('../db/models');
 
 db.sequelize.authenticate()

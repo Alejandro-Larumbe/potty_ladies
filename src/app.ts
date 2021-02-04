@@ -1,6 +1,6 @@
 
 // import dotenv from 'dotenv';
-import express from 'express';
+const express = require('express');
 const morgan = require('morgan')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -8,7 +8,7 @@ const { ValidationError } = require('sequelize')
 // const { environment, origin } = require('./config')
 
 // Routes
-const { router } = require('./routes/routes')
+const { router } = require('./routes/routes.ts')
 
 // load the environment variables from the .env file
 // dotenv.config({
@@ -18,7 +18,7 @@ const { router } = require('./routes/routes')
 const app = express()
 
 app.use(morgan('dev'))
-app.use(cors({origin}))
+// app.use(cors({origin}))
 app.use(cookieParser())
 app.use(express.json()) // ???
 app.use(express.urlencoded({ extended: false})) // ???
