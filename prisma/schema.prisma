@@ -28,15 +28,15 @@ model OrderItem {
 
 model Theme {
   id            int     @default(autoincrememt()) @id
-  headliner1    int
-  headliner2    int
-  headliner3    int
-  coverPicture1 string
-  coverPicture2 string
-  coverPicture3 string
-  coverPicture4 string
-  coverPicture5 string
-  mainText1     string
-  mainText2     string
-  mainText3     string
+  headliner1    int?
+  headliner2    int?
+  headliner3    int?
+  coverPicture1 string?
+  coverPicture2 string?
+  coverPicture3 string?
+  coverPicture4 string?
+  coverPicture5 string?
+  mainText1     string?
+  mainText2     string?
+  mainText3     string?
 }
