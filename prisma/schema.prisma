@@ -12,6 +12,38 @@ generator client {
 }
 
 
+model Image {
+  id        Int     @default(autoincrememt()) @id
+  plantId   Int
+  url       string
+  plant     Plant   @relation(fields: [plantId], references:[id])
+}
+
+model OrderItem {
+  id        Int     @default(autoincrememt()) @id
+  orderId   Int
+  plantId   Int
+  quantity  Int
+  plant     Plant   @relation(fields: [plantId], references:[id])
+  order     Order   @relation(fields: [orderId], references:[id])
+}
+
+model Theme {
+  id            int     @default(autoincrememt()) @id
+  headliner1    int?
+  headliner2    int?
+  headliner3    int?
+  coverPicture1 string?
+  coverPicture2 string?
+  coverPicture3 string?
+  coverPicture4 string?
+  coverPicture5 string?
+  mainText1     string?
+  mainText2     string?
+  mainText3     string?
+}
+
+
 model Order {
   id              Int @default(autoincrement()) @id
   userId          Int
@@ -55,4 +87,5 @@ model PromoCode {
   expirationDate  DateTime
   isActive        Boolean @default(false)
 }
+
 
