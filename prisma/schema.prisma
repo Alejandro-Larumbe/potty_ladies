@@ -11,6 +11,7 @@ generator client {
   previewFeatures = ["nativeTypes"]
 }
 
+
 model Order {
   id              Int @default(autoincrement()) @id
   userId          Int
@@ -29,9 +30,29 @@ model Order {
   promo PromoCode? @relation(fields: [promoCodeId], references: [id])
 }
 
+model User {
+  id              Int      @default(autoincrement()) @id
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  firstName       String
+  lastName        String
+  email           String   @unique
+  phone           String?
+  hashedPassword  String
+  addressStreet1  String?
+  addressStreet2  String?
+  addressCity     String?
+  addressRegion   String?
+  addressCountry  String?
+  addressZip      Int?
+
+  orders          Order[]
+}
+
 model PromoCode {
   id              Int @default(autoincrement()) @id
   name            String @unique
   expirationDate  DateTime
   isActive        Boolean @default(false)
 }
+
