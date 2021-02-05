@@ -15,7 +15,7 @@ generator client {
 model Image {
   id        Int     @default(autoincrememt()) @id
   plantId   Int
-  url       string
+  url       String
   plant     Plant   @relation(fields: [plantId], references:[id])
 }
 
@@ -29,25 +29,25 @@ model OrderItem {
 }
 
 model Theme {
-  id            int     @default(autoincrememt()) @id
-  headliner1    int?
-  headliner2    int?
-  headliner3    int?
-  coverPicture1 string?
-  coverPicture2 string?
-  coverPicture3 string?
-  coverPicture4 string?
-  coverPicture5 string?
-  mainText1     string?
-  mainText2     string?
-  mainText3     string?
+  id            Int     @default(autoincrememt()) @id
+  headliner1    Int?
+  headliner2    Int?
+  headliner3    Int?
+  coverPicture1 String?
+  coverPicture2 String?
+  coverPicture3 String?
+  coverPicture4 String?
+  coverPicture5 String?
+  mainText1     String?
+  mainText2     String?
+  mainText3     String?
 }
 
 
 model Order {
   id              Int @default(autoincrement()) @id
   userId          Int
-  total           Decimal  
+  total           Decimal
   dateTime        DateTime
   promoCodeId     Int?
   addressStreet1  String
@@ -87,5 +87,3 @@ model PromoCode {
   expirationDate  DateTime
   isActive        Boolean @default(false)
 }
-
-
