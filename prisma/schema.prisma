@@ -9,3 +9,28 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model User {
+  id              Int      @default(autoincrement()) @id
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  firstName       String
+  lastName        String
+  email           String   @unique
+  phone           String?
+  hashedPassword  String
+  addressStreet1  String?
+  addressStreet2  String?
+  addressCity     String?
+  addressRegion   String?
+  addressCountry  String?
+  addressZip      Int?
+
+
+}
+
+// model CartProduct {
+//   id      Int @default(autoincrement()) @id
+//   cartId  Int
+//   plantId Int
+// }
