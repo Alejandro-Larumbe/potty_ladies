@@ -28,7 +28,38 @@ model Order {
   createdAt      DateTime   @default(now())
   promo          PromoCode? @relation(fields: [promoCodeId], references: [id])
   User           User?      @relation(fields: [userId], references: [id])
+
+model Image {
+  id        Int     @default(autoincrememt()) @id
+  plantId   Int
+  url       String
+  plant     Plant   @relation(fields: [plantId], references:[id])
 }
+
+model OrderItem {
+  id        Int     @default(autoincrememt()) @id
+  orderId   Int
+  plantId   Int
+  quantity  Int
+  plant     Plant   @relation(fields: [plantId], references:[id])
+  order     Order   @relation(fields: [orderId], references:[id])
+}
+
+model Theme {
+  id            Int     @default(autoincrememt()) @id
+  headliner1    Int?
+  headliner2    Int?
+  headliner3    Int?
+  coverPicture1 String?
+  coverPicture2 String?
+  coverPicture3 String?
+  coverPicture4 String?
+  coverPicture5 String?
+  mainText1     String?
+  mainText2     String?
+  mainText3     String?
+}
+
 
 model User {
   id             Int      @id @default(autoincrement())
