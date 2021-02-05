@@ -26,7 +26,7 @@ model User {
   addressCountry  String?
   addressZip      Int?
 
-
+  orders          Order[]
 }
 
 // model CartProduct {
