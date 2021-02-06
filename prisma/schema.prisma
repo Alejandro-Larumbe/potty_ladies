@@ -11,42 +11,133 @@ generator client {
   previewFeatures = ["nativeTypes"]
 }
 
+// check on Decimal data type, we should have only 2 decimals
+// check how to limit the number of string characters
+// check NZ address format
+
+model User {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  firstName      String
+  lastName       String
+  email          String   @unique
+  phone          Int?
+  hashedPassword String
+  addressStreet1 String?
+  addressStreet2 String?
+  addressCity    String?
+  addressRegion  String?
+  addressZip     Int?
+
+  orders         Order[]
+}
+
+
 model Order {
-  id             Int        @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
+  updatedAt      DateTime @updatedAt
+  createdAt      DateTime @default(now())
   userId         Int
   total          Decimal
-  dateTime       DateTime
+  dateTime       DateTime @default(now())
   promoCodeId    Int?
   addressStreet1 String
   addressStreet2 String?
   addressCity    String
-  addressState   String
-  addressCountry String
+  addressRegion  String
   addressZip     Int
+  // this will be an enum
   status         String
-  updatedAt      DateTime   @updatedAt
-  createdAt      DateTime   @default(now())
-  promo          PromoCode? @relation(fields: [promoCodeId], references: [id])
-  User           User?      @relation(fields: [userId], references: [id])
 
-model Image {
-  id        Int     @default(autoincrememt()) @id
-  plantId   Int
-  url       String
-  plant     Plant   @relation(fields: [plantId], references:[id])
+  promoCode      PromoCode?  @relation(fields: [promoCodeId], references: [id])
+  user           User        @relation(fields: [userId], references: [id])
+  orderItems     OrderItem[]
 }
 
+
 model OrderItem {
-  id        Int     @default(autoincrememt()) @id
+  id        Int      @id @default(autoincrement())
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
   orderId   Int
   plantId   Int
   quantity  Int
-  plant     Plant   @relation(fields: [plantId], references:[id])
-  order     Order   @relation(fields: [orderId], references:[id])
+
+  order     Order    @relation(fields: [orderId], references: [id])
+  plant     Plant    @relation(fields: [plantId], references: [id])
 }
 
+
+model PromoCode {
+  id             Int      @id @default(autoincrement())
+  name           String   @unique
+  // could be customized to start later
+  startDate      DateTime @default(now())
+  expirationDate DateTime
+  orders         Order[]
+}
+
+
+model Plant {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  typeId      Int
+  description String
+  dimensions  String
+  price       Decimal
+  stock       Int
+  potSize     String
+
+  type        PlantType   @relation(fields: [typeId], references: id)
+  tags        PlantTag[]
+  images      Image[]
+  orderItems  OrderItem[]
+  // orderItems  OrderItem[]
+  // plantTag  PlantTag[]
+  // PlantTag    PlantTag[]
+}
+
+
+model PlantType {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  plants Plant[]
+}
+
+
+model Image {
+  id       Int    @id @default(autoincrement())
+  plantId  Int
+  sequence Int    @default(autoincrement())
+  url      String @unique
+  plant    Plant  @relation(fields: [plantId], references: [id])
+}
+
+
+model Tag {
+  id       Int        @id @default(autoincrement())
+  name     String     @unique
+  plants   PlantTag[]
+  // plantTag PlantTag[]
+  // PlantTag PlantTag[]
+}
+
+
+// Would this be better as PlantTag?
+model PlantTag {
+  id      Int   @id @default(autoincrement())
+  plantId Int
+  plant   Plant @relation(fields: [plantId], references: [id])
+  tagId   Int
+  tag     Tag   @relation(fields: [tagId], references: [id])
+}
+
+
+// stretch goal
 model Theme {
-  id            Int     @default(autoincrememt()) @id
+  id            Int     @id @default(autoincrement())
   headliner1    Int?
   headliner2    Int?
   headliner3    Int?
@@ -58,60 +149,4 @@ model Theme {
   mainText1     String?
   mainText2     String?
   mainText3     String?
-}
-
-
-model User {
-  id             Int      @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  firstName      String
-  lastName       String
-  email          String   @unique
-  phone          String?
-  hashedPassword String
-  addressStreet1 String?
-  addressStreet2 String?
-  addressCity    String?
-  addressRegion  String?
-  addressCountry String?
-  addressZip     Int?
-
-  orders Order[]
-}
-
-model PromoCode {
-  id             Int      @id @default(autoincrement())
-  name           String   @unique
-  expirationDate DateTime
-  isActive       Boolean  @default(false)
-  Order          Order[]
-}
-
-model Plant {
-  id          Int     @id @default(autoincrement())
-  name        String  @unique
-  typeId      Int
-  description String
-  dimensions  String
-  price       Decimal
-  stock       Int
-  potSize     String
-  type        Type    @relation(fields: [typeId], references: id)
-  tags        Tag[]
-}
-
-model Tag {
-  id     Int     @id @default(autoincrement())
-  name   String  @unique
-  plants Plant[]
-}
-
-// Would this be better as PlantTag?
-model TagPlant {
-  id      Int   @id @default(autoincrement())
-  plant   Plant @relation(fields: [plantId], references: [id])
-  tag     Tag   @relation(fields: [tagId], references: [id])
-  plantId Int
-  tagId   Int
 }
