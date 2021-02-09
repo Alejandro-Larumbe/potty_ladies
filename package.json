@@ -6,8 +6,7 @@
   "scripts": {
     "start": "per-env",
     "start:development": "nodemon -r dotenv/config bin/www",
-    "start:production": "node ./bin/www",
-    "build": "tsc -p ."
+    "start:production": "node ./bin/www"
   },
   "repository": {
     "type": "git",
