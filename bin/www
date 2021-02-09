@@ -1,16 +1,12 @@
 #!/usr/bin/env ts-node
 
+// import { PrismaClient } from '@prisma/client'
 const { port } = require('../config');
-console.log('be creative')
 const app = require('../src/app.ts');
-const db = require('../db/models');
+// const db = require('../prisma/schema.prisma');
 
-db.sequelize.authenticate()
-  .then(() => {
-    console.log('Database connection successful. Sequelize is ready to be used...');
-    app.listen(port, () => console.log(`Listening on port ${port}...`));
-  })
-  .catch(e => {
-    console.log('Database connection failed. :C');
-    console.error(e);
-  });
+// const prisma = new PrismaClient();
+
+app.listen(3000, () =>
+  console.log('REST API server ready at: http://localhost:3000'),
+)
