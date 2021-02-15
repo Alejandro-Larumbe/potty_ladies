@@ -50,8 +50,6 @@ router.post("/", async (req, res) => {
 //     "addressRegion":"123123",
 //     "addressZip":123123}
 
-
-
 //Log in
 router.post("/login", async (req, res, next) => {
   const {email, password} = req.body
@@ -60,11 +58,11 @@ router.post("/login", async (req, res, next) => {
       email:email
     }
   })
-  if (!user) {
 
-    let err = new Error("Login Failed")
+  if (!user) {
+    let err = new Error("User not found")
     err.message= "Email does not exist"
-    // next(err)
+    next(err)
     console.log(err.message)
   }
 })
