@@ -9,8 +9,9 @@ const cookieParser = require('cookie-parser')
 
 // Routes
 const router = require('./routes/index.ts')
-const { Request, Response, NextFunction } = require('express')
-const HttpException = require('./utils/HttpException')
+import { Request, Response, NextFunction } from 'express'
+// const HttpException = require('./utils/HttpException')
+import { HttpException } from './utils/HttpException'
 // load the environment variables from the .env file
 // dotenv.config({
 //   path: '.env'
@@ -36,12 +37,13 @@ app.use((_req, _res, next) => {
 });
 
 // ERROR HANDLERS
+// let error: InstanceType<typeof HttpException>; // no error
 
 app.use((err: HttpException, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof ValidationError) {
+  // if (err instanceof ValidationError) {
     err.errors = err.errors.map(e => e.message);
     err.title = 'Sequelize Error';
-  }
+  // }
   next(err);
 });
 
@@ -59,7 +61,7 @@ app.use((err, _req, res, _next) => {
   if (err.status === 401) {
     res.set('WWW-Authenticate', 'Bearer');
   }
-  
+
   console.error(errorData);
   res.json(errorData);
 });
