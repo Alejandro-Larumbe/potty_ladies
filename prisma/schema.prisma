@@ -8,7 +8,7 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["nativeTypes"]
+  previewFeatures = ["microsoftSqlServer"]
 }
 
 // check on Decimal data type, we should have only 2 decimals
@@ -85,7 +85,7 @@ model Plant {
   typeId      Int
   description String
   dimensions  String
-  price       Decimal
+  price       Numeric
   stock       Int
   potSize     String
 

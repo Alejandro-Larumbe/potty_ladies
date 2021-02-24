@@ -3,8 +3,6 @@ const prisma = new PrismaClient()
 const bcrypt = require("bcryptjs")
 const faker = require('faker');
 
-// const hashedPassword = async() => await bcrypt.hash('password', 10)
-
 async function main() {
 
   const hashedPassword = await bcrypt.hash('password', 10)
@@ -240,7 +238,7 @@ async function main() {
   })
 
   const orderItem1 = await prisma.orderItem.upsert({
-    where: {id: 1},
+    where: { id: 1 },
     update: {},
     create: {
       orderId: 1,
@@ -250,7 +248,7 @@ async function main() {
   })
 
   const orderItem2 = await prisma.orderItem.upsert({
-    where: {id: 2},
+    where: { id: 2 },
     update: {},
     create: {
       orderId: 1,
@@ -260,7 +258,7 @@ async function main() {
   })
 
   const orderItem3 = await prisma.orderItem.upsert({
-    where: {id: 3},
+    where: { id: 3 },
     update: {},
     create: {
       orderId: 1,
