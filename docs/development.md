@@ -266,10 +266,13 @@ This section details the technical aspects of this project's development. To see
 ## Wireframes
 
   <img 
-    src="" 
+    src="images/pot-2.png" 
     alt="Sketches, diagrams, screengrabs from similar sites for inspiration, mockups in devices like phone frames etc." 
-    title="">
-    
+    title="Wireframes">
+  <img 
+    src="images/pot-1.png" 
+    alt="Sketches, diagrams, screengrabs from similar sites for inspiration, mockups in devices like phone frames etc." 
+    title="Wireframes">
 </div>
 
 
