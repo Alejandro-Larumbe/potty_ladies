@@ -8,10 +8,10 @@ const cookieParser = require('cookie-parser')
 // const { environment, origin } = require('./config')
 
 // Routes
+const { Request, Response, NextFunction } = require('express')
 const router = require('./routes/index.ts')
-import { Request, Response, NextFunction } from 'express'
 // const HttpException = require('./utils/HttpException')
-import { HttpException } from './utils/HttpException'
+const { HttpException } = require('./utils/HttpException')
 const { environment } = require('../config/index')
 // load the environment variables from the .env file
 // dotenv.config({
@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false})) // ???
 
 app.use(router)
 
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req, res, next) => {
   const err = new HttpException(404, 'The requested resource couldn\'t be found.', ['The requested resource couldn\'t be found.'], 'The requested resource couldn\'t be found.')
 
   next(err)
@@ -46,7 +46,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 //   next(err);
 // });
 
-app.use((err: HttpException, req: Request, res: Response, next: NextFunction) => {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   const isProduction = environment === 'production';
 
