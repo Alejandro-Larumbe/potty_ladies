@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import * as bodyParser from 'body-parser'
 import express from 'express'
 
 import router from './routes/index';
@@ -7,7 +6,6 @@ import HttpException from './utils/HttpException';
 import { Request, Response, NextFunction } from 'express';
 const port = process.env.PORT
 
-const prisma = new PrismaClient()
 const app = express()
 
 app.use(router)
