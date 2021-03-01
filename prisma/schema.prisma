@@ -7,13 +7,9 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["microsoftSqlServer"]
+  provider = "prisma-client-js"
 }
 
-// check on Decimal data type, we should have only 2 decimals
-// check how to limit the number of string characters
-// check NZ address format
 
 model User {
   id             Int      @id @default(autoincrement())
@@ -85,7 +81,7 @@ model Plant {
   typeId      Int
   description String
   dimensions  String
-  price       Numeric
+  price       Decimal
   stock       Int
   potSize     String
 

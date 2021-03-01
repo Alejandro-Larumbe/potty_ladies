@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client'
+import bcrypt from "bcryptjs"
+import faker from 'faker';
 const prisma = new PrismaClient()
-const bcrypt = require("bcryptjs")
-const faker = require('faker');
+
 
 async function main() {
 
