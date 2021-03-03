@@ -1,5 +1,5 @@
 {
-  "name": "potty_ladies2",
+  "name": "potty_ladies",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "bugs": {
+    "url": "https://github.com/Alejandro-Larumbe/potty_ladies/issues"
+  },
+  "homepage": "https://github.com/Alejandro-Larumbe/potty_ladies#readme",
+ "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/body-parser": "1.19.0",
     "@types/express": "4.17.11",
@@ -33,6 +37,10 @@
     "express-promise-router": "^4.0.1"
   },
   "engines": {
+    "node": ">=10.0.0"
+  }
+}
+
     "node": ">=10.0.0"
   }
 }
