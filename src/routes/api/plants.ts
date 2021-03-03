@@ -1,6 +1,6 @@
-const router = require('express-promise-router')()
-import { Request, Response, NextFunction } from 'express'
-const { PrismaClient } = require('@prisma/client')
+import Router from 'express-promise-router'
+const router = Router()
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
@@ -84,4 +84,4 @@ router.get("/:id(\\d+)", async (req: Request, res: Response, next: NextFunction)
   res.json(result)
 })
 
-module.exports = router
+export default router;

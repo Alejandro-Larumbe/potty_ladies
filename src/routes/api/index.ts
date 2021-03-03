@@ -1,8 +1,9 @@
-const router = require('express-promise-router')()
-const routes = ['users', 'plants', 'tags', 'types']
+import Router from 'express-promise-router'
+const router = Router()
+import users from './users';
+import plants from './plants';
 
-for (let route of routes) {
-  router.use(`/${route}`, require(`./${route}.ts`))
-}
+router.use('/users', users)
+router.use('/plants', plants)
 
-module.exports = router;
+export default router
