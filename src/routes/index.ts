@@ -1,6 +1,8 @@
-const router = require('express-promise-router')()
-const api = require('./api/index.ts')
+import Router from "express-promise-router";
+const router = Router();
+
+import api from './api/index'
 
 router.use('/api', api)
 
-module.exports = router
+export default router

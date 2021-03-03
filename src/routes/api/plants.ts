@@ -1,11 +1,12 @@
-const router = require('express-promise-router')()
-const { PrismaClient } = require('@prisma/client')
+import Router from 'express-promise-router'
+const router = Router()
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
 router.post("/", async (req, res) => {
   const result = await prisma.plantType.create({
-    data: { 
+    data: {
       name: "Good plant"
      },
   })
@@ -17,4 +18,4 @@ router.get("/", (req, res) => {
   // res.redirect("/")
 })
 
-module.exports = router
+export default router;

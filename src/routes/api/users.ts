@@ -1,14 +1,11 @@
-const router = require('express-promise-router')()
-const { PrismaClient } = require('@prisma/client')
-const bcrypt = require("bcryptjs")
+import Router from 'express-promise-router'
+import bcrypt from "bcryptjs"
+import { PrismaClient } from '@prisma/client'
+
 const prisma = new PrismaClient()
-import { Request, Response, NextFunction } from 'express'
-import { HttpException } from '../../utils/HttpException'
-// import { HttpException } from './utils/HttpException'
+const router = Router()
 
-
-//creating User
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", async (req, res) => {
   const {
     firstName,
     lastName,
@@ -21,7 +18,6 @@ router.post("/", async (req: Request, res: Response) => {
     addressRegion,
     addressZip
   } = req.body
-  //destructure from req. body.
   const bcryptHashedPw = await bcrypt.hash(password,10)
   const result = await prisma.user.create({
     // create must need data:{data here}
@@ -38,7 +34,7 @@ router.post("/", async (req: Request, res: Response) => {
       addressZip
      },
   })
-  delete result.hashedPassword
+  result.hashedPassword = ''
   //delete hashedPassword and send the json to frontend.
   res.json(result)
 })
@@ -55,7 +51,7 @@ router.post("/", async (req: Request, res: Response) => {
 //     "addressZip":123123}
 
 //Log in
-router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
+router.post("/login", async (req, res, next) => {
   const {email, password} = req.body
   const user = await prisma.user.findUnique({
     where:{
@@ -64,24 +60,23 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
   })
 
   if (!user) {
-    let err = new HttpException(401, 'Email does not exist', ['User not found'], 'User not found')
+    // let err = new HttpException(401, 'Email does not exist', ['User not found'], 'User not found')
 
-    console.log(err)
-    next(err)
+    // console.log(err)
+    // next(err)
   }
 })
 
 //Get User's information
-router.get("/:id(\\d+)", async (req: Request, res: Response) => {
+router.get("/:id(\\d+)", async (req, res) => {
   const userId = Number(req.params.id)
   const user = await prisma.user.findUnique({
     where:{
       id:userId
     }
   })
-  delete user.hashedPassword
+  // user.hashedPassword = ''
   res.json(user)
 })
 
-
-module.exports = router
+export default router
