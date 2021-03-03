@@ -5,11 +5,13 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 router.get("/:id(\\d+)/plants", async (req: Request, res: Response, next: NextFunction) => {
-  const { id: plantId } = req.params;
-  const result = await prisma.plantType.findMany({
+  const { id } = req.params;
+  const result = await prisma.plants.findMany({
     where: {
-      plantId
+      tags: { id }
     }
   })
   res.json(result)
 })
+
+module.exports = router

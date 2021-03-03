@@ -24,3 +24,5 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   })
   res.json(result)
 })
+
+module.exports = router
