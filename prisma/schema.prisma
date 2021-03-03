@@ -91,12 +91,10 @@ model Plant {
   potSize     String
 
   type        PlantType   @relation(fields: [typeId], references: id)
-  tags        PlantTag[]
+  tags        Tag[]
+  plantTags   PlantTag[]
   images      Image[]
   orderItems  OrderItem[]
-  // orderItems  OrderItem[]
-  // plantTag  PlantTag[]
-  // PlantTag    PlantTag[]
 }
 
 
@@ -122,9 +120,8 @@ model Tag {
   id       Int        @id @default(autoincrement())
   name     String     @unique
   
-  plants   PlantTag[]
-  // plantTag PlantTag[]
-  // PlantTag PlantTag[]
+  plants    Plant[]
+  plantTags PlantTag[]
 }
 
 
