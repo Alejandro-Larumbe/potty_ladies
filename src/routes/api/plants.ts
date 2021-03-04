@@ -10,20 +10,7 @@ router.get("/", async (_req: Request, res: Response, next: NextFunction) => {
   res.json(result)
 })
 
-router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-  /*
-{
-    "name": "New Plant!!",
-    "typeId": 1,
-    "description": "Desc",
-    "dimensions": "dimension",
-    "price": 12.40,
-    "stock": 19,
-    "potSize": "size"
-}
-  */
-  console.log(req.body)
-  console.log('HIHIHIHIHIH!!!!!')
+router.post("/", async (req: Request, res: Response) => {
   const { 
     name,
     typeId,
@@ -48,8 +35,19 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   res.json(result)
 })
 
-router.put("/:id(\\d+)", async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params
+router.get("/:id(\\d+)", async (req: Request, res: Response) => {
+  const id = +req.params.id
+  const result = await prisma.plant.findUnique({
+    where: {
+      id
+    }
+  })
+  console.log(result)
+  res.json(result)
+})
+
+router.put("/:id(\\d+)", async (req: Request, res: Response) => {
+  const id = +req.params.id
   const { 
     name,
     typeId,
@@ -62,7 +60,7 @@ router.put("/:id(\\d+)", async (req: Request, res: Response, next: NextFunction)
 
   const result = await prisma.plant.update({
     where: {
-      id: +id
+      id
     },
     data: {
       name,
@@ -78,24 +76,13 @@ router.put("/:id(\\d+)", async (req: Request, res: Response, next: NextFunction)
 })
 
 router.delete("/:id(\\d+)", async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params
+  const id = +req.params.id
   const result = await prisma.plant.delete({
     where: {
-      id: +id
+      id
     }
   })
   res.json(result)
 })
 
-
-router.get("/:id(\\d+)", async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
-  const result = await prisma.plant.findUnique({
-    where: {
-      id: +id
-    }
-  })
-  res.json(result)
-})
-
-export default router;
+export default router

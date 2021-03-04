@@ -14,4 +14,4 @@ router.get("/:id(\\d+)/plants", async (req: Request, res: Response, next: NextFu
   res.json(result)
 })
 
-module.exports = router
+export default router

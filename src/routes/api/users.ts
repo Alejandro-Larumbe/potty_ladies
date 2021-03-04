@@ -11,7 +11,6 @@ app.use(router)
 app.use(express.json())
 
 router.post("/", async (req, res) => {
-  console.log('HIHIHIIH', req.body)
   const {
     firstName,
     lastName,
