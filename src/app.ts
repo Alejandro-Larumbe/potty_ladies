@@ -38,5 +38,4 @@ app.use((err: HttpException, req:Request, res: Response, next: NextFunction) => 
 const server = app.listen(port, () =>
 console.log(
   `🚀 Server ready at: http://localhost:${port}\n⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api`,
-),
-)
+),)
