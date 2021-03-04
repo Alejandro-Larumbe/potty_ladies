@@ -5,18 +5,17 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 router.get("/:id(\\d+)/plants", async (req: Request, res: Response, next: NextFunction) => {
-  const plantId = +req.params.id;
-  console.log(plantId, typeof plantId)
-  const result = await prisma.plantType.findMany({
+  const typeId = +req.params.id
+  const result = await prisma.plant.findMany({
     where: {
-      plantId
+      typeId
     }
   })
   res.json(result)
 })
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
-  const { name, plantId } = req.body;
+  const { name, plantId } = req.body
   const result = await prisma.plantType.create({
     data: { 
       name,
