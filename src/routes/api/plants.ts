@@ -1,5 +1,6 @@
 import Router from 'express-promise-router'
 const router = Router()
+import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
@@ -10,6 +11,19 @@ router.get("/", async (_req: Request, res: Response, next: NextFunction) => {
 })
 
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+  /*
+{
+    "name": "New Plant!!",
+    "typeId": 1,
+    "description": "Desc",
+    "dimensions": "dimension",
+    "price": 12.40,
+    "stock": 19,
+    "potSize": "size"
+}
+  */
+  console.log(req.body)
+  console.log('HIHIHIHIHIH!!!!!')
   const { 
     name,
     typeId,
@@ -48,7 +62,7 @@ router.put("/:id(\\d+)", async (req: Request, res: Response, next: NextFunction)
 
   const result = await prisma.plant.update({
     where: {
-      id
+      id: +id
     },
     data: {
       name,
@@ -67,7 +81,7 @@ router.delete("/:id(\\d+)", async (req: Request, res: Response, next: NextFuncti
   const { id } = req.params
   const result = await prisma.plant.delete({
     where: {
-      id
+      id: +id
     }
   })
   res.json(result)
@@ -78,7 +92,7 @@ router.get("/:id(\\d+)", async (req: Request, res: Response, next: NextFunction)
   const { id } = req.params;
   const result = await prisma.plant.findUnique({
     where: {
-      id
+      id: +id
     }
   })
   res.json(result)

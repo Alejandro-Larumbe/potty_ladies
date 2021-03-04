@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client'
 import express from 'express'
 
 import router from './routes/index';
@@ -8,11 +7,12 @@ const port = process.env.PORT
 
 const app = express()
 
+app.use(express.json())
+app.use(express.urlencoded())
 app.use(router)
 
 app.use((req, res, next) => {
   const err = new HttpException(404, 'The requested resource couldn\'t be found.', ['The requested resource couldn\'t be found.'], 'The requested resource couldn\'t be found.')
-
   next(err)
 });
 app.use((err: HttpException, req:Request, res: Response, next: NextFunction) => {

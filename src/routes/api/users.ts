@@ -1,11 +1,17 @@
 import Router from 'express-promise-router'
 import bcrypt from "bcryptjs"
 import { PrismaClient } from '@prisma/client'
+import express from 'express'
 
 const prisma = new PrismaClient()
 const router = Router()
 
+const app = express()
+app.use(router)
+app.use(express.json())
+
 router.post("/", async (req, res) => {
+  console.log('HIHIHIIH', req.body)
   const {
     firstName,
     lastName,
