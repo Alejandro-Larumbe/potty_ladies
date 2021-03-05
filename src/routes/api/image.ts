@@ -90,7 +90,7 @@ router.post("/images", upload.any(), fileFilter, async (req: any, res: express.R
     const {plantId, sequence} = req.body;
     const file = req.files[0];
     const params = {
-        Bucket: "pottyladies",
+        Bucket: "pottyladies",// put in .env file.
         Key: Date.now().toString() + file.originalname,
         Body: file.buffer,
         ACL: "public-read",
@@ -110,9 +110,9 @@ router.post("/images", upload.any(), fileFilter, async (req: any, res: express.R
 })
 
 
-router.delete("/images/:id", async(req:express.Request, res:express.Response, next: express.NextFunction)=>{
+router.delete("/images/:id(\\d+)", async(req:express.Request, res:express.Response, next: express.NextFunction)=>{
     const {id} = req.params;
-    const image = await prisma.image.findUnique({
+    const image = await prisma.image.delete({
         where:{
             id:Number(id)
         }
