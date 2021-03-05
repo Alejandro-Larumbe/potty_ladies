@@ -238,6 +238,23 @@ async function main() {
     },
   })
 
+  const order2 = await prisma.order.upsert({
+    where: { id: 2 },
+    update: {},
+    create: {
+      userId: 3,
+      total: 600.00,
+      promoCodeId: 1,
+      addressStreet1: faker.address.streetAddress(),
+      addressStreet2: '1a',
+      addressCity: faker.address.city(),
+      addressRegion: faker.address.county(),
+      addressZip: 121212,
+      // this will be an enum
+      status: 'open'
+    },
+  })
+
   const orderItem1 = await prisma.orderItem.upsert({
     where: { id: 1 },
     update: {},

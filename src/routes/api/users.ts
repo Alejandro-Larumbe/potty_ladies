@@ -39,8 +39,8 @@ router.post("/", async (req, res) => {
       addressZip
      },
   })
+  // delete hashedPassword and send the json to frontend.
   result.hashedPassword = ''
-  //delete hashedPassword and send the json to frontend.
   res.json(result)
 })
 ///sign up/////////////////////

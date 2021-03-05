@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "dotenv ts-node src/app.ts nodemon",
+    "dev": "dotenv ts-node src/app.ts nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
