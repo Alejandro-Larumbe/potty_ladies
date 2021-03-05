@@ -223,32 +223,32 @@ This section details the technical aspects of this project's development. To see
 | `/`        | Home page |
 | `/about` |  |
 | `/contact` |  |
-| `/login` |  |
-| `/signup` |  |
+| `/login` | Simple login form |
+| `/signup` | Almost identical to login form |
 | `/not-found` |  |
 | `/faq` | Including refund policy, TOS, privacy policy, delivery terms, location... |
 
 #### `/account`
 | Route Path | Purpose |
 |------------|---------|
-| `/account` |  |
-| `/account/order-history` |  |
-| `/account/addresses` |  |
-| `/account/payment-forms` |  |
+| `/` |  |
+| `/order-history` |  |
+| `/addresses` |  |
+| `/payment-forms` |  |
 
 #### `/shop`
 | Route Path | Purpose |
 |------------|---------|
-| `/shop` |  |
-| `/shop/categories/:category` |  |
-| `/shop/categories/:category/products/:product` |  |
+| `/` |  |
+| `/categories/:category` |  |
+| `/categories/:category/products/:product` |  |
 
 #### `/order`
 | Route Path | Purpose |
 |------------|---------|
-| `/order/cart` |  |
-| `/order/checkout` |  |
-| `/order/checkout/complete` |  |
+| `/cart` |  |
+| `/checkout` |  |
+| `/checkout/complete` |  |
 
 
 
@@ -257,8 +257,54 @@ This section details the technical aspects of this project's development. To see
 **ROOT** `/users`
 | METHOD | Route Path | Purpose |
 |--------|------------|---------|
-| POST   | `/`        | Validate new account |
-|  |  |
+| POST   | `/login`   | Log in a user |
+| POST   | `/signup` | Sign up a user |
+| GET    | `/:id` | Get a user's profile. show info ex. current order, order history |
+| GET    | `/:id/orders` | Get all the orders belong to the user |
+
+**ROOT** `/plants`
+| METHOD | Route Path | Purpose |
+|--------|------------|---------|
+| POST   | `/`        | Add plant for admin |
+| POST   | `/types`   | Create a type for plants |
+| POST   | `/tags`    | Create a type for plants |
+| GET    | `/`        | Get all the plants |
+| GET    | `/:id`     | Get the plant by id |
+| GET    | `/tags/:id/plants` | Get all plants by tag id |
+| GET    | `/types/:id/plants` | Get all plants by type |
+| PUT    | `/`        | Edit plant for admin |
+| DELETE | `/:id`     | Delete plant for admin |
+
+**ROOT** `/images`
+| METHOD | Route Path | Purpose |
+|--------|------------|---------|
+| POST   | `/`        | Add plant's image |
+| DELETE | `/:id`     | Delete plant's image |
+
+**ROOT** `/orders`
+| METHOD | Route Path | Purpose |
+|--------|------------|---------|
+| POST   | `/`        | Create an order for the user - NOTE May need user id in body |
+| GET    | `/`        | Get all the orders for admin |
+| GET    | `/finished` | Get all completed orders for admin |
+| GET    | `/open`    | Get all open orders for admin |
+
+**ROOT** `/orderItems`
+| METHOD | Route Path | Purpose |
+|--------|------------|---------|
+| POST   | `/`        | Create orderItem |
+| GET    | `/:id`     | Get orderitem by id |
+| PUT    | `/:id`     | Update order items |
+| DELETE | `/:id`     | Delete order items |
+
+**ROOT** `/promoCodes`
+| METHOD | Route Path | Purpose |
+|--------|------------|---------|
+| GET    | `/`        | Get all promocode for admin |
+| GET    | `/:id`     | Get certain Promocode |
+| POST   | `/`        | Create a promocode for admin |
+| PUT    | `/:id`     | Edit a promocode for admin |
+| DELETE | `/:id`     | Delete a promocode for admin |
 
 
 <div align="center">
